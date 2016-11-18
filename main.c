@@ -62,7 +62,7 @@ size_t longitud(Lista lista){
     int num= 0;
     Elemento* elem= (*lista);
 
-    while(elem != NULL){
+    while(elem != NULL){//iteramos hasta encontrar la longitud
         num++;
         elem= elem -> siguiente;
     } 
@@ -73,8 +73,8 @@ int inserta_elemento(Lista lista, void *valor){
     Elemento *new = malloc(sizeof(Elemento));
     Elemento* elem= (*lista);
     
-    new->valor=valor;
-    new->siguiente=elem;
+    new->valor=valor;//asignamos el valor
+    new->siguiente=elem;//asignamos al siguiente del nuevo como la cabeza
     *lista=new;
 
     return longitud(lista);
@@ -87,15 +87,15 @@ Elemento* quita_elemento(Lista lista, size_t posicion){
     int reps = longitud(lista);
     int i;
     Elemento* curr= (*lista);
-    Elemento* prev= NULL;
+    Elemento* prev= (*lista);
 
-    if(posicion==0){
+    if(posicion==0){//si es el primer elemento
         *lista=curr->siguiente;
         return curr;
     }
 
 
-    for (i=0;i<reps;i++){
+    for (i=0;i<reps;i++){//en otro caso
         curr= curr -> siguiente;
         if(i==posicion-1){
             prev->siguiente=curr->siguiente;
@@ -114,7 +114,7 @@ void imprime_lista_int(Lista lista){
 
     for (i=0;i<reps;i++){
         printf("El elemento %d es %d\n", i, *((int*)elem->valor));
-        elem= elem -> siguiente;
+        elem= elem -> siguiente;//iteramos en la lista e imprimimos cada elemento uno por uno
     }
 }
 
@@ -134,7 +134,6 @@ void ordena_lista(Lista lista, int(*cmp)(const void*, const void*)){
     Elemento* elem= (*lista);
 
     for (i=0;i<longitud(lista);i++){
-        //printf("El elemento jajajajajajaj %d es %d\n", i, *((int*)elem->valor));
         arr[i]=*((int*)elem->valor);
         elem= elem -> siguiente;
     }
@@ -143,12 +142,9 @@ void ordena_lista(Lista lista, int(*cmp)(const void*, const void*)){
     elem= (*lista);
 
     for (i=0;i<longitud(lista);i++){
-        //printf("estoy intentando %d es %d\n", i, *((int*)elem->valor));
         *((int*)elem->valor)=arr[i];
-        //printf("help please %d es %d\n", i, *((int*)elem->valor));
         elem=elem->siguiente;
     }
-    //imprime_lista_int(lista);
     free(arr);
 }
 
